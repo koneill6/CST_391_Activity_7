@@ -9,3 +9,8 @@
     margin: 10px;
     padding: 5px;
 }
+
+.card_album
+{
+    cursor: pointer;
+}

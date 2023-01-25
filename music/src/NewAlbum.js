@@ -1,4 +1,5 @@
 import React from "react";
+import FormTextArea from "./FormTextArea";
 import dataSource from "./dataSource";
 
 class NewAlbum extends React.Component
@@ -22,9 +23,9 @@ class NewAlbum extends React.Component
         this.setState({artist: event.target.value});
     }
 
-    updateDescription = (event) => {
-        console.log("Updating Description with ", event.target.value);
-        this.setState({description: event.target.value});
+    updateDescription = (t) => {
+        console.log("Updating Description with ", t);
+        this.setState({description: t});
     }
 
     updateYear = (event) => {
@@ -40,11 +41,16 @@ class NewAlbum extends React.Component
     handleFormSubmit = (event) => {
         event.preventDefault();
         this.saveAlbum(this.state);
+        this.clearFields(event);
     }
 
     handleCancel = (event) => {
         console.log("Canceling New Album");
         this.props.onCancel();
+    }
+
+    clearFields = (event) => {
+        event.target.reset();
     }
 
     saveAlbum = async(album) => {
@@ -64,8 +70,7 @@ class NewAlbum extends React.Component
                         <input type="text" className="form-control" id="albumTitle" placeholder="Enter Album Title" onChange={this.updateTitle} />
                         <label htmlFor="albumArtist">Artist</label>
                         <input type="text" className="form-control" id="albumArtist" placeholder="Enter Album Artist" onChange={this.updateArtist} />
-                        <label htmlFor="albumDescription">Description</label>
-                        <textarea type="text" className="form-control" id="albumDescription" placeholder="Enter Album Description" onChange={this.updateDescription} />
+                        <FormTextArea id="albumDescription" title="Description" placeholder="Write something about the album" onChange={this.updateDescription}/>
                         <label htmlFor="albumYear">Year</label>
                         <input type="text" className="form-control" id="albumYear" placeholder="Enter Album Year" onChange={this.updateYear} />
                         <label htmlFor="albumImage">Image</label>
